@@ -14,16 +14,20 @@ tmp_player = classes.PlayerCreator.create(classes.PlayerCreator())
 enemy = classes.EnemyCreator.create(classes.EnemyCreator())
 
 
-class MainTester(unittest.TestCase):
+class PlayerFactoryTester(unittest.TestCase):
     def test_is_tmp_player(self):
         global tmp_player
         self.assertIsInstance(tmp_player, classes.Player, "tmp_player has type tmp_player")
         self.assertIsInstance(tmp_player.bullet, classes.Bullet, "tmp_player has bullet")
 
+
+class EnemyFactoryTester(unittest.TestCase):
     def test_is_enemy(self):
         global enemy
         self.assertIsInstance(enemy, classes.Enemy, "tmp_player has type tmp_player")
 
+
+class PlayerFuctionalityTester(unittest.TestCase):
     def test_is_tmp_player_moving(self):
         global tmp_player
         tmp_player.x_change = 2
@@ -31,6 +35,13 @@ class MainTester(unittest.TestCase):
         tmp_player.move()
         self.assertEqual(tmp_player.X, tmp_X + tmp_player.x_change)
 
+    def test_fire(self):
+        global tmp_player, screen
+        tmp_player.fire(tmp_player.X, tmp_player.Y, screen)
+        self.assertEqual(tmp_player.bullet_state, 'fire')
+
+
+class EnemyFunctionalityTester(unittest.TestCase):
     def test_is_enemy_moving(self):
         global enemy
         enemy.x_change = 6
@@ -38,12 +49,16 @@ class MainTester(unittest.TestCase):
         enemy.move()
         self.assertEqual(enemy.X, tmp_X + enemy.x_change)
 
+
+class TestObjectDrawing(unittest.TestCase):
     def test_draw(self):
         global enemy
         enemy.draw(0, 0, screen)
         color = tuple(screen.get_at((32, 32)))
         self.assertNotEqual(color, (0, 0, 0, 255))
 
+
+class CollisionTest(unittest.TestCase):
     def test_collide(self):
         global enemy, tmp_player
         enemy.X = 0
@@ -55,12 +70,6 @@ class MainTester(unittest.TestCase):
         tmp_player.Y = 0
         self.assertTrue(tmp_player.collide(enemy))
 
-    def test_fire(self):
-        global tmp_player, screen
-        tmp_player.fire(tmp_player.X, tmp_player.Y, screen)
-        self.assertEqual(tmp_player.bullet_state, 'fire')
-
 
 if __name__ == '__main__':
     unittest.main()
-
