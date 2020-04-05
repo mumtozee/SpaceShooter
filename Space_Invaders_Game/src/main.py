@@ -4,7 +4,7 @@ import os
 from pygame import mixer
 
 pygame.init()
-resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..//res//')
+resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..\\res\\')
 
 # setting up the game window
 screen = pygame.display.set_mode((800, 600))

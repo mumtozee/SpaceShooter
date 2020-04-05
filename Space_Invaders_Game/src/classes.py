@@ -4,7 +4,7 @@ import random
 import math
 import os
 
-resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..//res//')
+resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..\\res\\')
 
 
 class Creator(metaclass=abc.ABCMeta):
