@@ -1,10 +1,15 @@
 import pygame
-import classes
 import os
 from pygame import mixer
+import sys
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(SCRIPT_DIR))
+
+from src import classes
 
 pygame.init()
-resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..\\res\\')
+resource_path = SCRIPT_DIR + '\\res\\'
 
 # setting up the game window
 screen = pygame.display.set_mode((800, 600))
@@ -79,7 +84,7 @@ while running:
     # Enemy movement
     for i in range(number_of_enemies):
         # GameOver: if enemies get under the line of the player or all dead
-        if enemy_list[i].Y >= 440:
+        if enemy_list[i].Y >= 420:
             for tmp_enemy in enemy_list:
                 tmp_enemy.Y = 2000
             show_gameover()
