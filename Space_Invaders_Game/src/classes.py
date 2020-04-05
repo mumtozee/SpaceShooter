@@ -2,6 +2,9 @@ import abc
 import pygame
 import random
 import math
+import os
+
+resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..//res//')
 
 
 class Creator(metaclass=abc.ABCMeta):
@@ -45,7 +48,7 @@ class Unit(metaclass=abc.ABCMeta):
 
 class Bullet(Unit):
     def __init__(self, x, y, x_change=0, y_change=12):
-        Unit.__init__(self, 'res/bullet.png', x, y, x_change, y_change)
+        Unit.__init__(self, resource_path + 'bullet.png', x, y, x_change, y_change)
 
     def move(self):
         pass
@@ -53,7 +56,7 @@ class Bullet(Unit):
 
 class Player(Unit):
     def __init__(self, x=300, y=480, x_change=0, y_change=0, bullet_state='ready'):
-        Unit.__init__(self, 'res/battleship.png', x, y, x_change, y_change)
+        Unit.__init__(self, resource_path + 'battleship.png', x, y, x_change, y_change)
         self.bullet_state = bullet_state
         self.bullet = Bullet(x, y)
 
@@ -71,7 +74,7 @@ class Player(Unit):
 
 class Enemy(Unit):
     def __init__(self):
-        Unit.__init__(self, 'res/enemy.png', random.randint(0, 735), random.randint(50, 150), 2, 15)
+        Unit.__init__(self, resource_path + 'enemy.png', random.randint(0, 735), random.randint(50, 150), 2, 15)
 
     def move(self):
         self.X += self.x_change

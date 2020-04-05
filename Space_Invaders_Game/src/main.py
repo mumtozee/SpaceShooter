@@ -1,24 +1,24 @@
 import pygame
 import classes
 import os
-
 from pygame import mixer
 
 pygame.init()
+resource_path = os.path.join(os.getcwd(), os.path.dirname(__file__), '..//res//')
 
 # setting up the game window
 screen = pygame.display.set_mode((800, 600))
 
 # Background
-bg_img = pygame.image.load('res/background.jpg')
+bg_img = pygame.image.load(resource_path + 'background.jpg')
 
 # Background Music
-mixer.music.load('res/bg_music.wav')
+mixer.music.load(resource_path + 'bg_music.wav')
 mixer.music.play(-1)
 
 # Title and Icon
 pygame.display.set_caption("Space Invaders 1.0")
-icon = pygame.image.load('res/ufo_icon.png')
+icon = pygame.image.load(resource_path + 'ufo_icon.png')
 pygame.display.set_icon(icon)
 
 # Player
@@ -67,7 +67,7 @@ while running:
                 player.x_change = -2
             if event.key == pygame.K_SPACE:
                 if player.bullet_state == 'ready':
-                    bullet_sound = mixer.Sound('res/shot.wav')
+                    bullet_sound = mixer.Sound(resource_path + 'shot.wav')
                     bullet_sound.play()
                     player.bullet.X = player.X
                     player.fire(player.bullet.X, player.bullet.Y, screen)
@@ -91,7 +91,7 @@ while running:
         # Collision
         collision = enemy_list[i].collide(player.bullet)
         if collision:
-            explosion_sound = mixer.Sound('res/explosion.wav')
+            explosion_sound = mixer.Sound(resource_path + 'explosion.wav')
             explosion_sound.play()
             player.bullet.Y = 480
             player.bullet_state = 'ready'
